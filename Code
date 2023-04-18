@@ -1,0 +1,16 @@
+from socket import *
+serverport = 14750
+servername = "10.0.32.221"
+# create the UDP client socket
+socketClient = socket(AF_INET, SOCK_DGRAM)
+
+data = "Hello"
+socketClient.sendto(data.encode(), (servername, serverport))
+serverdata, serveraddress = socketClient.recvfrom(2048)
+data = input(serverdata.decode())
+socketClient.sendto(data.encode(), (servername, serverport))
+serverdata, serveraddress = socketClient.recvfrom(2048)
+print(serverdata.decode())
+
+# close the client socket
+socketClient.close()
